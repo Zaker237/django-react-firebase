@@ -1,0 +1,67 @@
+{
+    "name": "Todo",
+    "models": [
+        
+        {
+            "name": "TodoList",
+            "attributs": [
+                {
+                    "name": "title",
+                    "type": "String",
+                    "required": true,
+                    "size": 128
+                },
+                {
+                    "name": "created_at",
+                    "type": "DateTime",
+                    "required": true
+                },
+                {
+                    "name": "creator",
+                    "type": "reference",
+                    "required": true,
+                    "model": "User"
+                }
+            ]
+        },
+        {
+            "name": "Todo",
+            "attributs": [
+                {
+                    "name": "description",
+                    "type": "Text",
+                    "required": true,
+                    "size": 1000
+                },
+                {
+                    "name": "created_at",
+                    "type": "DateTime",
+                    "required": true,
+                    "size": 255
+                },
+                {
+                    "name": "finished_at",
+                    "type": "DateTime",
+                    "required": false
+                },
+                {
+                    "name": "is_finished",
+                    "type": "Boolean",
+                    "required": false
+                },
+                {
+                    "name": "creator",
+                    "type": "reference",
+                    "required": true,
+                    "model": "User"
+                },
+                {
+                    "name": "todolist",
+                    "type": "reference",
+                    "required": true,
+                    "model": "TodoList"
+                }
+            ]
+        }
+    ]
+}
