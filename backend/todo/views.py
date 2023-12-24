@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
+from django.utils.decorators import method_decorator
 from .models import (
     TodoList,
     Todo,
@@ -11,16 +12,20 @@ from .serializers import (
     TodoSerializer,
 )
 
+from .decorators import verify_firebase_auth
+
 
 class TodoListListApiView(APIView):
     # add permission to check if user is authenticated
     # permission_classes = [permissions.IsAuthenticated]
 
     # 1. List all
+    @method_decorator(verify_firebase_auth)
     def get(self, request, *args, **kwargs):
         """
         List all the todolist items.
         """
+        print(request.firebase_user)
         todolists = TodoList.objects.all()
         serializer = TodoListSerializer(todolists, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
